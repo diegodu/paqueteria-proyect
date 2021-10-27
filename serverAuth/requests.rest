@@ -1,0 +1,29 @@
+GET http://localhost:5000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGllZ29EdSIsImlhdCI6MTYyMTQ2NDc2NSwiZXhwIjoxNjIxNDY0NzgwfQ.hACQH82d4dCJ9JikhC8eEg8vShbgBWIY-M2C2U63zKk
+
+###
+
+DELETE http://localhost:6000/logout 
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGllZ29EdSIsImlhdCI6MTYyMTQ2NDk3NH0.7jeDR0wNEd7b8549Wj_xwY9Wo_glACE5Oo-0iGm8aQc"
+}
+
+###
+
+POST http://localhost:6000/token 
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGllZ29EdSIsImlhdCI6MTYyMTQ2NDk3NH0.7jeDR0wNEd7b8549Wj_xwY9Wo_glACE5Oo-0iGm8aQc"
+}
+
+###
+
+POST http://localhost:6000/login
+Content-Type: application/json
+
+{
+    "username": "DiegoDu"
+}

@@ -1,0 +1,8 @@
+query get_usuario {
+  tra_usuario{
+    apellido
+    nombre
+    email
+    password
+  }
+}

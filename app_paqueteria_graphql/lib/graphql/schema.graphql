@@ -1,0 +1,1235 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""
+expression to compare columns of type Boolean. All fields are combined with logical 'AND'.
+"""
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _is_null: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
+"""
+expression to compare columns of type Int. All fields are combined with logical 'AND'.
+"""
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+scalar json
+
+"""
+expression to compare columns of type json. All fields are combined with logical 'AND'.
+"""
+input json_comparison_exp {
+  _eq: json
+  _gt: json
+  _gte: json
+  _in: [json!]
+  _is_null: Boolean
+  _lt: json
+  _lte: json
+  _neq: json
+  _nin: [json!]
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  perform the action: "NombreAccion"
+  """
+  NombreAccion(nombre: String!): respuesta
+
+  """
+  perform the action: "Prueba"
+  """
+  Prueba(respuesta: String!): salida
+
+  """
+  perform the action: "actionName"
+  """
+  actionName(arg1: SampleInput!): SampleOutput
+
+  """
+  delete data from the table: "tra_usuario"
+  """
+  delete_tra_usuario(
+    """filter the rows which have to be deleted"""
+    where: tra_usuario_bool_exp!
+  ): tra_usuario_mutation_response
+
+  """
+  delete single row from the table: "tra_usuario"
+  """
+  delete_tra_usuario_by_pk(id: Int!): tra_usuario
+
+  """
+  perform the action: "enviarCodigo"
+  """
+  enviarCodigo(asunto: String!, codigo: String!, email: String!): salidaCodigo
+
+  """
+  perform the action: "enviarCorreo"
+  """
+  enviarCorreo(asunto: String!, direccion: String!, email: String!, iva: String!, nombre: String!, subtotal: String!, total: String!): SampleOutput
+
+  """
+  insert data into the table: "tra_usuario"
+  """
+  insert_tra_usuario(
+    """the rows to be inserted"""
+    objects: [tra_usuario_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: tra_usuario_on_conflict
+  ): tra_usuario_mutation_response
+
+  """
+  insert a single row into the table: "tra_usuario"
+  """
+  insert_tra_usuario_one(
+    """the row to be inserted"""
+    object: tra_usuario_insert_input!
+
+    """on conflict condition"""
+    on_conflict: tra_usuario_on_conflict
+  ): tra_usuario
+
+  """
+  update data of the table: "tra_usuario"
+  """
+  update_tra_usuario(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: tra_usuario_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: tra_usuario_set_input
+
+    """filter the rows which have to be updated"""
+    where: tra_usuario_bool_exp!
+  ): tra_usuario_mutation_response
+
+  """
+  update single row of the table: "tra_usuario"
+  """
+  update_tra_usuario_by_pk(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: tra_usuario_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: tra_usuario_set_input
+    pk_columns: tra_usuario_pk_columns_input!
+  ): tra_usuario
+}
+
+scalar numeric
+
+"""
+expression to compare columns of type numeric. All fields are combined with logical 'AND'.
+"""
+input numeric_comparison_exp {
+  _eq: numeric
+  _gt: numeric
+  _gte: numeric
+  _in: [numeric!]
+  _is_null: Boolean
+  _lt: numeric
+  _lte: numeric
+  _neq: numeric
+  _nin: [numeric!]
+}
+
+"""column ordering options"""
+enum order_by {
+  """in the ascending order, nulls last"""
+  asc
+
+  """in the ascending order, nulls first"""
+  asc_nulls_first
+
+  """in the ascending order, nulls last"""
+  asc_nulls_last
+
+  """in the descending order, nulls first"""
+  desc
+
+  """in the descending order, nulls first"""
+  desc_nulls_first
+
+  """in the descending order, nulls last"""
+  desc_nulls_last
+}
+
+"""query root"""
+type query_root {
+  """
+  fetch data from the table: "tra_usuario"
+  """
+  tra_usuario(
+    """distinct select on columns"""
+    distinct_on: [tra_usuario_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [tra_usuario_order_by!]
+
+    """filter the rows returned"""
+    where: tra_usuario_bool_exp
+  ): [tra_usuario!]!
+
+  """
+  fetch aggregated fields from the table: "tra_usuario"
+  """
+  tra_usuario_aggregate(
+    """distinct select on columns"""
+    distinct_on: [tra_usuario_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [tra_usuario_order_by!]
+
+    """filter the rows returned"""
+    where: tra_usuario_bool_exp
+  ): tra_usuario_aggregate!
+
+  """fetch data from the table: "tra_usuario" using primary key columns"""
+  tra_usuario_by_pk(id: Int!): tra_usuario
+}
+
+type respuesta {
+  succes: Boolean!
+}
+
+type salida {
+  succes: Boolean!
+}
+
+type salidaCodigo {
+  succes: Boolean!
+}
+
+input SampleInput {
+  password: String!
+  username: String!
+}
+
+type SampleOutput {
+  accessToken: String!
+}
+
+"""
+expression to compare columns of type String. All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String!]
+  _is_null: Boolean
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String!]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
+}
+
+"""subscription root"""
+type subscription_root {
+  """
+  fetch data from the table: "tra_usuario"
+  """
+  tra_usuario(
+    """distinct select on columns"""
+    distinct_on: [tra_usuario_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [tra_usuario_order_by!]
+
+    """filter the rows returned"""
+    where: tra_usuario_bool_exp
+  ): [tra_usuario!]!
+
+  """
+  fetch aggregated fields from the table: "tra_usuario"
+  """
+  tra_usuario_aggregate(
+    """distinct select on columns"""
+    distinct_on: [tra_usuario_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [tra_usuario_order_by!]
+
+    """filter the rows returned"""
+    where: tra_usuario_bool_exp
+  ): tra_usuario_aggregate!
+
+  """fetch data from the table: "tra_usuario" using primary key columns"""
+  tra_usuario_by_pk(id: Int!): tra_usuario
+}
+
+scalar timestamp
+
+"""
+expression to compare columns of type timestamp. All fields are combined with logical 'AND'.
+"""
+input timestamp_comparison_exp {
+  _eq: timestamp
+  _gt: timestamp
+  _gte: timestamp
+  _in: [timestamp!]
+  _is_null: Boolean
+  _lt: timestamp
+  _lte: timestamp
+  _neq: timestamp
+  _nin: [timestamp!]
+}
+
+scalar timestamptz
+
+"""
+Transporte - Usuario
+
+
+columns and relationships of "tra_usuario"
+
+"""
+type tra_usuario {
+  """Apellido"""
+  apellido: String!
+  cod_recuperacion: String
+
+  """Comisi├│n"""
+  comision: numeric
+
+  """Created on"""
+  create_date: timestamp
+
+  """Created by"""
+  create_uid: Int
+
+  """Currency"""
+  currency_id: Int
+
+  """Direcci├│n"""
+  direccion: String!
+
+  """Tiene discapacidad"""
+  discapacidad: Boolean
+
+  """Display Name"""
+  display_name: String
+
+  """Email"""
+  email: String!
+
+  """Estado"""
+  estado: Boolean
+
+  """Ganancias"""
+  ganancias: numeric
+  id: Int!
+
+  """Latitud"""
+  lat: numeric
+
+  """Longitud"""
+  lon: numeric
+
+  """Lugar"""
+  lugar_id: Int!
+
+  """Nombre"""
+  nombre: String!
+
+  """Proveedor padre"""
+  padre_id: Int
+
+  """Pago"""
+  pago: numeric
+
+  """Password"""
+  password: String
+
+  """Prioridad"""
+  prioridad: Int
+
+  """Raz├│n social"""
+  razon_social: String!
+
+  """C├®dula/Pasaporte"""
+  ruc: String!
+
+  """Telefono"""
+  telefono: String!
+
+  """Tipo Usuario"""
+  tipo_id: Int!
+
+  """Last Updated on"""
+  write_date: timestamp
+
+  """Last Updated by"""
+  write_uid: Int
+}
+
+"""
+aggregated selection of "tra_usuario"
+"""
+type tra_usuario_aggregate {
+  aggregate: tra_usuario_aggregate_fields
+  nodes: [tra_usuario!]!
+}
+
+"""
+aggregate fields of "tra_usuario"
+"""
+type tra_usuario_aggregate_fields {
+  avg: tra_usuario_avg_fields
+  count(columns: [tra_usuario_select_column!], distinct: Boolean): Int
+  max: tra_usuario_max_fields
+  min: tra_usuario_min_fields
+  stddev: tra_usuario_stddev_fields
+  stddev_pop: tra_usuario_stddev_pop_fields
+  stddev_samp: tra_usuario_stddev_samp_fields
+  sum: tra_usuario_sum_fields
+  var_pop: tra_usuario_var_pop_fields
+  var_samp: tra_usuario_var_samp_fields
+  variance: tra_usuario_variance_fields
+}
+
+"""
+order by aggregate values of table "tra_usuario"
+"""
+input tra_usuario_aggregate_order_by {
+  avg: tra_usuario_avg_order_by
+  count: order_by
+  max: tra_usuario_max_order_by
+  min: tra_usuario_min_order_by
+  stddev: tra_usuario_stddev_order_by
+  stddev_pop: tra_usuario_stddev_pop_order_by
+  stddev_samp: tra_usuario_stddev_samp_order_by
+  sum: tra_usuario_sum_order_by
+  var_pop: tra_usuario_var_pop_order_by
+  var_samp: tra_usuario_var_samp_order_by
+  variance: tra_usuario_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "tra_usuario"
+"""
+input tra_usuario_arr_rel_insert_input {
+  data: [tra_usuario_insert_input!]!
+  on_conflict: tra_usuario_on_conflict
+}
+
+"""aggregate avg on columns"""
+type tra_usuario_avg_fields {
+  comision: Float
+  create_uid: Float
+  currency_id: Float
+  ganancias: Float
+  id: Float
+  lat: Float
+  lon: Float
+  lugar_id: Float
+  padre_id: Float
+  pago: Float
+  prioridad: Float
+  tipo_id: Float
+  write_uid: Float
+}
+
+"""
+order by avg() on columns of table "tra_usuario"
+"""
+input tra_usuario_avg_order_by {
+  comision: order_by
+  create_uid: order_by
+  currency_id: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  padre_id: order_by
+  pago: order_by
+  prioridad: order_by
+  tipo_id: order_by
+  write_uid: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "tra_usuario". All fields are combined with a logical 'AND'.
+"""
+input tra_usuario_bool_exp {
+  _and: [tra_usuario_bool_exp]
+  _not: tra_usuario_bool_exp
+  _or: [tra_usuario_bool_exp]
+  apellido: String_comparison_exp
+  cod_recuperacion: String_comparison_exp
+  comision: numeric_comparison_exp
+  create_date: timestamp_comparison_exp
+  create_uid: Int_comparison_exp
+  currency_id: Int_comparison_exp
+  direccion: String_comparison_exp
+  discapacidad: Boolean_comparison_exp
+  display_name: String_comparison_exp
+  email: String_comparison_exp
+  estado: Boolean_comparison_exp
+  ganancias: numeric_comparison_exp
+  id: Int_comparison_exp
+  lat: numeric_comparison_exp
+  lon: numeric_comparison_exp
+  lugar_id: Int_comparison_exp
+  nombre: String_comparison_exp
+  padre_id: Int_comparison_exp
+  pago: numeric_comparison_exp
+  password: String_comparison_exp
+  prioridad: Int_comparison_exp
+  razon_social: String_comparison_exp
+  ruc: String_comparison_exp
+  telefono: String_comparison_exp
+  tipo_id: Int_comparison_exp
+  write_date: timestamp_comparison_exp
+  write_uid: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "tra_usuario"
+"""
+enum tra_usuario_constraint {
+  """unique or primary key constraint"""
+  tra_usuario_pkey
+}
+
+"""
+input type for incrementing integer columne in table "tra_usuario"
+"""
+input tra_usuario_inc_input {
+  create_uid: Int
+  currency_id: Int
+  id: Int
+  lugar_id: Int
+  padre_id: Int
+  prioridad: Int
+  tipo_id: Int
+  write_uid: Int
+}
+
+"""
+input type for inserting data into table "tra_usuario"
+"""
+input tra_usuario_insert_input {
+  apellido: String
+  cod_recuperacion: String
+  comision: numeric
+  create_date: timestamp
+  create_uid: Int
+  currency_id: Int
+  direccion: String
+  discapacidad: Boolean
+  display_name: String
+  email: String
+  estado: Boolean
+  ganancias: numeric
+  id: Int
+  lat: numeric
+  lon: numeric
+  lugar_id: Int
+  nombre: String
+  padre_id: Int
+  pago: numeric
+  password: String
+  prioridad: Int
+  razon_social: String
+  ruc: String
+  telefono: String
+  tipo_id: Int
+  write_date: timestamp
+  write_uid: Int
+}
+
+"""aggregate max on columns"""
+type tra_usuario_max_fields {
+  apellido: String
+  cod_recuperacion: String
+  comision: numeric
+  create_uid: Int
+  currency_id: Int
+  direccion: String
+  display_name: String
+  email: String
+  ganancias: numeric
+  id: Int
+  lat: numeric
+  lon: numeric
+  lugar_id: Int
+  nombre: String
+  padre_id: Int
+  pago: numeric
+  password: String
+  prioridad: Int
+  razon_social: String
+  ruc: String
+  telefono: String
+  tipo_id: Int
+  write_uid: Int
+}
+
+"""
+order by max() on columns of table "tra_usuario"
+"""
+input tra_usuario_max_order_by {
+  apellido: order_by
+  cod_recuperacion: order_by
+  comision: order_by
+  create_uid: order_by
+  currency_id: order_by
+  direccion: order_by
+  display_name: order_by
+  email: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  nombre: order_by
+  padre_id: order_by
+  pago: order_by
+  password: order_by
+  prioridad: order_by
+  razon_social: order_by
+  ruc: order_by
+  telefono: order_by
+  tipo_id: order_by
+  write_uid: order_by
+}
+
+"""aggregate min on columns"""
+type tra_usuario_min_fields {
+  apellido: String
+  cod_recuperacion: String
+  comision: numeric
+  create_uid: Int
+  currency_id: Int
+  direccion: String
+  display_name: String
+  email: String
+  ganancias: numeric
+  id: Int
+  lat: numeric
+  lon: numeric
+  lugar_id: Int
+  nombre: String
+  padre_id: Int
+  pago: numeric
+  password: String
+  prioridad: Int
+  razon_social: String
+  ruc: String
+  telefono: String
+  tipo_id: Int
+  write_uid: Int
+}
+
+"""
+order by min() on columns of table "tra_usuario"
+"""
+input tra_usuario_min_order_by {
+  apellido: order_by
+  cod_recuperacion: order_by
+  comision: order_by
+  create_uid: order_by
+  currency_id: order_by
+  direccion: order_by
+  display_name: order_by
+  email: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  nombre: order_by
+  padre_id: order_by
+  pago: order_by
+  password: order_by
+  prioridad: order_by
+  razon_social: order_by
+  ruc: order_by
+  telefono: order_by
+  tipo_id: order_by
+  write_uid: order_by
+}
+
+"""
+response of any mutation on the table "tra_usuario"
+"""
+type tra_usuario_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [tra_usuario!]!
+}
+
+"""
+input type for inserting object relation for remote table "tra_usuario"
+"""
+input tra_usuario_obj_rel_insert_input {
+  data: tra_usuario_insert_input!
+  on_conflict: tra_usuario_on_conflict
+}
+
+"""
+on conflict condition type for table "tra_usuario"
+"""
+input tra_usuario_on_conflict {
+  constraint: tra_usuario_constraint!
+  update_columns: [tra_usuario_update_column!]!
+  where: tra_usuario_bool_exp
+}
+
+"""
+ordering options when selecting data from "tra_usuario"
+"""
+input tra_usuario_order_by {
+  apellido: order_by
+  cod_recuperacion: order_by
+  comision: order_by
+  create_date: order_by
+  create_uid: order_by
+  currency_id: order_by
+  direccion: order_by
+  discapacidad: order_by
+  display_name: order_by
+  email: order_by
+  estado: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  nombre: order_by
+  padre_id: order_by
+  pago: order_by
+  password: order_by
+  prioridad: order_by
+  razon_social: order_by
+  ruc: order_by
+  telefono: order_by
+  tipo_id: order_by
+  write_date: order_by
+  write_uid: order_by
+}
+
+"""
+primary key columns input for table: "tra_usuario"
+"""
+input tra_usuario_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "tra_usuario"
+"""
+enum tra_usuario_select_column {
+  """column name"""
+  apellido
+
+  """column name"""
+  cod_recuperacion
+
+  """column name"""
+  comision
+
+  """column name"""
+  create_date
+
+  """column name"""
+  create_uid
+
+  """column name"""
+  currency_id
+
+  """column name"""
+  direccion
+
+  """column name"""
+  discapacidad
+
+  """column name"""
+  display_name
+
+  """column name"""
+  email
+
+  """column name"""
+  estado
+
+  """column name"""
+  ganancias
+
+  """column name"""
+  id
+
+  """column name"""
+  lat
+
+  """column name"""
+  lon
+
+  """column name"""
+  lugar_id
+
+  """column name"""
+  nombre
+
+  """column name"""
+  padre_id
+
+  """column name"""
+  pago
+
+  """column name"""
+  password
+
+  """column name"""
+  prioridad
+
+  """column name"""
+  razon_social
+
+  """column name"""
+  ruc
+
+  """column name"""
+  telefono
+
+  """column name"""
+  tipo_id
+
+  """column name"""
+  write_date
+
+  """column name"""
+  write_uid
+}
+
+"""
+input type for updating data in table "tra_usuario"
+"""
+input tra_usuario_set_input {
+  apellido: String
+  cod_recuperacion: String
+  comision: numeric
+  create_date: timestamp
+  create_uid: Int
+  currency_id: Int
+  direccion: String
+  discapacidad: Boolean
+  display_name: String
+  email: String
+  estado: Boolean
+  ganancias: numeric
+  id: Int
+  lat: numeric
+  lon: numeric
+  lugar_id: Int
+  nombre: String
+  padre_id: Int
+  pago: numeric
+  password: String
+  prioridad: Int
+  razon_social: String
+  ruc: String
+  telefono: String
+  tipo_id: Int
+  write_date: timestamp
+  write_uid: Int
+}
+
+"""aggregate stddev on columns"""
+type tra_usuario_stddev_fields {
+  comision: Float
+  create_uid: Float
+  currency_id: Float
+  ganancias: Float
+  id: Float
+  lat: Float
+  lon: Float
+  lugar_id: Float
+  padre_id: Float
+  pago: Float
+  prioridad: Float
+  tipo_id: Float
+  write_uid: Float
+}
+
+"""
+order by stddev() on columns of table "tra_usuario"
+"""
+input tra_usuario_stddev_order_by {
+  comision: order_by
+  create_uid: order_by
+  currency_id: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  padre_id: order_by
+  pago: order_by
+  prioridad: order_by
+  tipo_id: order_by
+  write_uid: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type tra_usuario_stddev_pop_fields {
+  comision: Float
+  create_uid: Float
+  currency_id: Float
+  ganancias: Float
+  id: Float
+  lat: Float
+  lon: Float
+  lugar_id: Float
+  padre_id: Float
+  pago: Float
+  prioridad: Float
+  tipo_id: Float
+  write_uid: Float
+}
+
+"""
+order by stddev_pop() on columns of table "tra_usuario"
+"""
+input tra_usuario_stddev_pop_order_by {
+  comision: order_by
+  create_uid: order_by
+  currency_id: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  padre_id: order_by
+  pago: order_by
+  prioridad: order_by
+  tipo_id: order_by
+  write_uid: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type tra_usuario_stddev_samp_fields {
+  comision: Float
+  create_uid: Float
+  currency_id: Float
+  ganancias: Float
+  id: Float
+  lat: Float
+  lon: Float
+  lugar_id: Float
+  padre_id: Float
+  pago: Float
+  prioridad: Float
+  tipo_id: Float
+  write_uid: Float
+}
+
+"""
+order by stddev_samp() on columns of table "tra_usuario"
+"""
+input tra_usuario_stddev_samp_order_by {
+  comision: order_by
+  create_uid: order_by
+  currency_id: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  padre_id: order_by
+  pago: order_by
+  prioridad: order_by
+  tipo_id: order_by
+  write_uid: order_by
+}
+
+"""aggregate sum on columns"""
+type tra_usuario_sum_fields {
+  comision: numeric
+  create_uid: Int
+  currency_id: Int
+  ganancias: numeric
+  id: Int
+  lat: numeric
+  lon: numeric
+  lugar_id: Int
+  padre_id: Int
+  pago: numeric
+  prioridad: Int
+  tipo_id: Int
+  write_uid: Int
+}
+
+"""
+order by sum() on columns of table "tra_usuario"
+"""
+input tra_usuario_sum_order_by {
+  comision: order_by
+  create_uid: order_by
+  currency_id: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  padre_id: order_by
+  pago: order_by
+  prioridad: order_by
+  tipo_id: order_by
+  write_uid: order_by
+}
+
+"""
+update columns of table "tra_usuario"
+"""
+enum tra_usuario_update_column {
+  """column name"""
+  apellido
+
+  """column name"""
+  cod_recuperacion
+
+  """column name"""
+  comision
+
+  """column name"""
+  create_date
+
+  """column name"""
+  create_uid
+
+  """column name"""
+  currency_id
+
+  """column name"""
+  direccion
+
+  """column name"""
+  discapacidad
+
+  """column name"""
+  display_name
+
+  """column name"""
+  email
+
+  """column name"""
+  estado
+
+  """column name"""
+  ganancias
+
+  """column name"""
+  id
+
+  """column name"""
+  lat
+
+  """column name"""
+  lon
+
+  """column name"""
+  lugar_id
+
+  """column name"""
+  nombre
+
+  """column name"""
+  padre_id
+
+  """column name"""
+  pago
+
+  """column name"""
+  password
+
+  """column name"""
+  prioridad
+
+  """column name"""
+  razon_social
+
+  """column name"""
+  ruc
+
+  """column name"""
+  telefono
+
+  """column name"""
+  tipo_id
+
+  """column name"""
+  write_date
+
+  """column name"""
+  write_uid
+}
+
+"""aggregate var_pop on columns"""
+type tra_usuario_var_pop_fields {
+  comision: Float
+  create_uid: Float
+  currency_id: Float
+  ganancias: Float
+  id: Float
+  lat: Float
+  lon: Float
+  lugar_id: Float
+  padre_id: Float
+  pago: Float
+  prioridad: Float
+  tipo_id: Float
+  write_uid: Float
+}
+
+"""
+order by var_pop() on columns of table "tra_usuario"
+"""
+input tra_usuario_var_pop_order_by {
+  comision: order_by
+  create_uid: order_by
+  currency_id: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  padre_id: order_by
+  pago: order_by
+  prioridad: order_by
+  tipo_id: order_by
+  write_uid: order_by
+}
+
+"""aggregate var_samp on columns"""
+type tra_usuario_var_samp_fields {
+  comision: Float
+  create_uid: Float
+  currency_id: Float
+  ganancias: Float
+  id: Float
+  lat: Float
+  lon: Float
+  lugar_id: Float
+  padre_id: Float
+  pago: Float
+  prioridad: Float
+  tipo_id: Float
+  write_uid: Float
+}
+
+"""
+order by var_samp() on columns of table "tra_usuario"
+"""
+input tra_usuario_var_samp_order_by {
+  comision: order_by
+  create_uid: order_by
+  currency_id: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  padre_id: order_by
+  pago: order_by
+  prioridad: order_by
+  tipo_id: order_by
+  write_uid: order_by
+}
+
+"""aggregate variance on columns"""
+type tra_usuario_variance_fields {
+  comision: Float
+  create_uid: Float
+  currency_id: Float
+  ganancias: Float
+  id: Float
+  lat: Float
+  lon: Float
+  lugar_id: Float
+  padre_id: Float
+  pago: Float
+  prioridad: Float
+  tipo_id: Float
+  write_uid: Float
+}
+
+"""
+order by variance() on columns of table "tra_usuario"
+"""
+input tra_usuario_variance_order_by {
+  comision: order_by
+  create_uid: order_by
+  currency_id: order_by
+  ganancias: order_by
+  id: order_by
+  lat: order_by
+  lon: order_by
+  lugar_id: order_by
+  padre_id: order_by
+  pago: order_by
+  prioridad: order_by
+  tipo_id: order_by
+  write_uid: order_by
+}
+
+scalar uuid
+
